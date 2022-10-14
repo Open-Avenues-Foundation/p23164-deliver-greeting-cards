@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Open-Avenues-Foundation/p22049-deliver-greeting-cards/issues"
   },
-  "homepage": "https://github.com/Open-Avenues-Foundation/p22049-deliver-greeting-cards#readme"
+  "homepage": "https://github.com/Open-Avenues-Foundation/p22049-deliver-greeting-cards#readme",
+  "dependencies": {
+    "lob": "^6.6.3"
+  }
 }
