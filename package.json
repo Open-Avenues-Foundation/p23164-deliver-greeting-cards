@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/Open-Avenues-Foundation/p22049-deliver-greeting-cards#readme",
   "dependencies": {
-    "lob": "^6.6.3"
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "lob": "^6.6.3",
+    "pg": "^8.8.0"
   }
 }

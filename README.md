@@ -5,7 +5,7 @@
 `git clone https://github.com/Open-Avenues-Foundation/p22049-deliver-greeting-cards.git`
 
 ## Configuration 
-In the `index.js` script, replace _YOUR API KEY HERE_ with a [Lob](https://docs.lob.com/) API key. 
+Create a .env file that looks like the .env.example file and fill in the environment variables. 
 
 ## Run the Script 
 `npm start`
