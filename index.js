@@ -18,19 +18,19 @@ function getDBClient () {
 
 // TODO: fetch the user by the user_id
 async function getUser (client, user_id) {
-
+  
 }
 
-// TODO: get events for next week
+
 async function getUpcomingEvents (client) {
   const date = new Date();
 
   let datePlus7Days = new Date(date.setDate(date.getDate() + 7));
   datePlus7Days = datePlus7Days.toISOString().split('T')[0];
 
-  // TODO: write query to fetch all events on datePlus7Days
-  const response = await client.query('TODO: write query', [datePlus7Days]);
 
+  const response = await client.query('SELECT * FROM events WHERE date = $1', [datePlus7Days]);
+  
   return response.rows;
 }
 
