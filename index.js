@@ -19,7 +19,7 @@ function getDBClient () {
 // fetch the user by the user_id
 async function getUser (client, user_id) {
   const response = await client.query('SELECT * FROM users WHERE id = $1', [user_id]);
-  return response.rows;
+  return response.rows[0];
 }
 
 // get the events for next week
@@ -29,6 +29,8 @@ async function getUpcomingEvents (client) {
   let datePlus7Days = new Date(date.setDate(date.getDate() + 7));
   datePlus7Days = datePlus7Days.toISOString().split('T')[0];
 
+  console.log('checking for date', datePlus7Days);
+
   const response = await client.query('SELECT * FROM events WHERE date = $1', [datePlus7Days]);
   
   return response.rows;
@@ -36,6 +38,7 @@ async function getUpcomingEvents (client) {
 
 // sends a postcard using the lob api
 async function sendPostcard (address_id, event_type, user_name) {
+  console.log(`sending postcard to ${user_name} for ${event_type}`);
   await Lob.postcards.create({
     to: address_id,
     front: `<h1> Happy ${event_type}, ${user_name}!`,
