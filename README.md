@@ -7,5 +7,8 @@
 ## Configuration 
 Create a .env file that looks like the .env.example file and fill in the environment variables. 
 
+## Install Dependencies 
+`npm install`
+
 ## Run the Script 
 `npm start`
