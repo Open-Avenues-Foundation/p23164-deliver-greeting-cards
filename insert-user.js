@@ -16,7 +16,7 @@ function getDBClient () {
 }
 
 // TODO: insert user into users table
-function insertUser () {
+async function insertUser (name, address_id) {
 
 }
 
@@ -28,7 +28,7 @@ function insertUser () {
         const name = process.argv[2];
         const address_id = process.argv[3];
 
-        const user = insertUser(name, address_id);
+        const user = await insertUser(name, address_id);
         console.log(user);
     } catch (e) {
         console.log(e);
