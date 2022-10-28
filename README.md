@@ -16,6 +16,9 @@ Create a .env file that looks like the .env.example file and fill in the environ
 ## Insert a User 
 `npm run start:insert:user 'Karan Kwatra' 'adr_123'`
 
+## Insert a Event
+`npm run start:insert:event 'event_type' '2022-10-28' '1'`
+
 Arguments: 
 1. user's name 
 2. user's Lob address id
