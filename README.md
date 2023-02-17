@@ -1,11 +1,7 @@
-# p22049-deliver-greeting-cards
-
-
-## Clone the Repository 
-`git clone https://github.com/Open-Avenues-Foundation/p22049-deliver-greeting-cards.git`
+# P23017-deliver-greeting-cards
 
 ## Configuration 
-Create a .env file that looks like the .env.example file and fill in the environment variables. 
+If you are using GitHub Codespaces, all environment variables should already be available to you. 
 
 ## Install Dependencies 
 `npm install`
@@ -22,4 +18,3 @@ Create a .env file that looks like the .env.example file and fill in the environ
 Arguments: 
 1. user's name 
 2. user's Lob address id
-
