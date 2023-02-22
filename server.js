@@ -1,7 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const pg = require('pg');
 
 const app = express();
+app.use(bodyParser.json()) // for parsing application/json
+
 const port = 3000;
 
 const client = new pg.Client({
