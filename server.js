@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
 
 // Sayeed
 app.get('/events', async (req, res) => {
+  const response = await client.query('SELECT * FROM events');
+  res.send(response.rows);
   // TODO
   // this endpoint should return all events in the database
 });
@@ -58,6 +60,15 @@ app.get('/users/:id', async (req, res) => {
 
 // Sayeed 
 app.post('/users', async (req, res) => {
+  // currently capable of taking static values in Postman and entering directly into DB
+  // TODO: adjust to be dynamic
+  const name = req.body.name;
+  const address_id = req.body.address_id;
+  res.send('POSTED');
+  const data_row = await client.query('INSERT INTO users (name, address_id) VALUES ($1, $2) Returning *', [
+    name,
+    address_id,
+  ]);
   // TODO
   // this endpoint should create a new user in the database 
 });
