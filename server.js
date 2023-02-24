@@ -64,12 +64,11 @@ app.post('/users', async (req, res) => {
   // TODO: adjust to be dynamic
   const name = req.body.name;
   const address_id = req.body.address_id;
-  res.send('POSTED');
   const data_row = await client.query('INSERT INTO users (name, address_id) VALUES ($1, $2) Returning *', [
     name,
     address_id,
   ]);
-  // TODO
+  res.send(data_row.rows[0]);
   // this endpoint should create a new user in the database 
 });
 
