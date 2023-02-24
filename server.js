@@ -1,3 +1,4 @@
+const { arEG } = require('date-fns/locale');
 const express = require('express');
 const pg = require('pg');
 
@@ -12,6 +13,8 @@ const client = new pg.Client({
   port: process.env.DB_PORT,
 });
 client.connect();
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -38,12 +41,24 @@ app.post('/events', async (req, res) => {
 // Tameem
 app.patch('/events/:id', async (req, res) => {
   // TODO
+  var response = 0; 
+  if(req.body.event_type != null){
+     response = await client.query('UPDATE events SET event_type = $1 WHERE id = $2 RETURNING events', [req.body.event_type ,req.params.id]);
+  }else if(req.body.date != null){
+     response = await client.query('UPDATE events SET date = $1 WHERE id = $2 RETURNING events', [req.body.date ,req.params.id]);
+  }else if(req.body.user_id != null){
+     response = await client.query('UPDATE events SET user_id = $1 WHERE id = $2 RETURNING events', [req.body.user_id ,req.params.id]);
+  }
+  
+  res.send(response.rows);
   // this endpoint should update an event by its id
 });
 
 // Tameem
 app.get('/users', async (req, res) => {
   // TODO
+  const response = await client.query('SELECT * FROM users');
+  res.send(response.rows);
   // this endpoint should return all users in the database
 });
 
