@@ -93,10 +93,10 @@ app.patch('/users/:id', async (req, res) => {
   // this endpoint should update a user by its id
   var response = 0;
   if(req.body.name != null){
-    response = await client.query('UPDATE * FROM users WHERE name = $1 WHERE id = $2 RETURNING *', [req.body.name,req.params.id]);
+    response = await client.query('UPDATE * FROM users SET name = $1 WHERE id = $2 RETURNING *', [req.body.name,req.params.id]);
   }
   if(req.body.address_id != null){
-    response = await client.query('UPDATE * FROM users WHERE address_id = $1 WHERE id = $2 RETURNING *', [req.body.address_id, req.params.id]);
+    response = await client.query('UPDATE * FROM users SET address_id = $1 WHERE id = $2 RETURNING *', [req.body.address_id, req.params.id]);
   }
   res.send(response.rows);
 });
