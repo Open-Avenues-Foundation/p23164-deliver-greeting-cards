@@ -34,6 +34,8 @@ app.get('/events', async (req, res) => {
 app.get('/events/:id', async (req, res) => {
   // TODO
   // this endpoint should return an event by its id
+  const response = await client.query('SELECT * FROM events WHERE id = $1', [req.params.id]);
+  res.send(response.rows);
 });
 
 // Damaris
@@ -48,7 +50,7 @@ app.patch('/events/:id', async (req, res) => {
   var response = 0; 
   if(req.body.event_type != null){
      response = await client.query('UPDATE events SET event_type = $1 WHERE id = $2 RETURNING *', [req.body.event_type ,req.params.id]);
-  } if(req.body.date != null){
+  }if(req.body.date != null){
      response = await client.query('UPDATE events SET date = $1 WHERE id = $2 RETURNING *', [req.body.date ,req.params.id]);
   } if(req.body.user_id != null){
      response = await client.query('UPDATE events SET user_id = $1 WHERE id = $2 RETURNING *', [req.body.user_id ,req.params.id]);
@@ -89,6 +91,14 @@ app.post('/users', async (req, res) => {
 app.patch('/users/:id', async (req, res) => {
   // TODO
   // this endpoint should update a user by its id
+  var response = 0;
+  if(req.body.name != null){
+    response = await client.query('UPDATE * FROM users WHERE name = $1 WHERE id = $2 RETURNING *', [req.body.name,req.params.id]);
+  }
+  if(req.body.address_id != null){
+    response = await client.query('UPDATE * FROM users WHERE address_id = $1 WHERE id = $2 RETURNING *', [req.body.address_id, req.params.id]);
+  }
+  res.send(response.rows);
 });
 
 app.listen(port, () => {
