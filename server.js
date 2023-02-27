@@ -90,7 +90,6 @@ app.post('/users', async (req, res) => {
 // Gabby
 app.patch('/users/:id', async (req, res) => {
   // TODO
-  // this endpoint should update a user by its id
   var response = 0;
   if(req.body.name != null){
     response = await client.query('UPDATE users SET name = $1 WHERE id = $2 RETURNING *', [req.body.name,req.params.id]);
