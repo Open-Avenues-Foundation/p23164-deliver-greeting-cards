@@ -39,6 +39,15 @@ app.get('/events/:id', async (req, res) => {
 // Damaris
 app.post('/events', async (req, res) => {
   // TODO
+  const event_type = req.body.event_type;
+  const date = req.body.date;
+  const user_id = req.body.user_id;
+  const response = await client.query('INSERT INTO events (event_type, date, user_id) VALUES($1, $2, $3) RETURNING *',[
+  event_type,
+  date,
+  user_id,
+  ]);
+  res.send(response.rows[0]);
   // this endpoint should create a new event in the database
 });
 
@@ -68,6 +77,14 @@ app.get('/users', async (req, res) => {
 // Damaris
 app.get('/users/:id', async (req, res) => {
   // TODO
+  const id = req.params.id;
+  const response = await client.query('SELECT * FROM users WHERE id=$1', [id]);
+  const userRow = response.rows[0];
+  if(!userRow){
+    res.status(404).send('HTTP Not Found Error');
+    return;
+  }
+  res.send(userRow);
   // this endpoint should return a user by their id 
 });
 
