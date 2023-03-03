@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:server": "nodemon server.js",
-    "start:insert:user": "node insert-user.js",
-    "start:insert:event": "node insert-event.js",
+    "start": "nodemon server.js",
+    "send": "node index.js",
+    "insert:user": "node scripts/insert-user.js",
+    "insert:event": "node scripts/insert-event.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -5,7 +5,7 @@ const pg = require('pg');
 const app = express();
 app.use(bodyParser.json()) // for parsing application/json
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const client = new pg.Client({
   user: process.env.DB_USER,
@@ -18,12 +18,12 @@ client.connect();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Hello World!');
 });
 
 // Sayeed
-app.get('/events', async (req, res) => {
+app.get('/api/events', async (req, res) => {
   const response = await client.query('SELECT * FROM events');
   res.send(response.rows);
   // TODO
@@ -31,7 +31,7 @@ app.get('/events', async (req, res) => {
 });
 
 // Gabby
-app.get('/events/:id', async (req, res) => {
+app.get('/api/events/:id', async (req, res) => {
   // TODO
   // this endpoint should return an event by its id
   const response = await client.query('SELECT * FROM events WHERE id = $1', [req.params.id]);
@@ -39,7 +39,7 @@ app.get('/events/:id', async (req, res) => {
 });
 
 // Damaris
-app.post('/events', async (req, res) => {
+app.post('/api/events', async (req, res) => {
   // TODO
   const event_type = req.body.event_type;
   const date = req.body.date;
@@ -54,7 +54,7 @@ app.post('/events', async (req, res) => {
 });
 
 // Tameem
-app.patch('/events/:id', async (req, res) => {
+app.patch('/api/events/:id', async (req, res) => {
   // TODO
   var response = 0; 
   if(req.body.event_type != null){
@@ -69,7 +69,7 @@ app.patch('/events/:id', async (req, res) => {
 });
 
 // Tameem
-app.get('/users', async (req, res) => {
+app.get('/api/users', async (req, res) => {
   // TODO
   const response = await client.query('SELECT * FROM users');
   res.send(response.rows);
@@ -77,7 +77,7 @@ app.get('/users', async (req, res) => {
 });
 
 // Damaris
-app.get('/users/:id', async (req, res) => {
+app.get('/api/users/:id', async (req, res) => {
   // TODO
   const id = req.params.id;
   const response = await client.query('SELECT * FROM users WHERE id=$1', [id]);
@@ -91,7 +91,7 @@ app.get('/users/:id', async (req, res) => {
 });
 
 // Sayeed 
-app.post('/users', async (req, res) => {
+app.post('/api/users', async (req, res) => {
   // currently capable of taking static values in Postman and entering directly into DB
   // TODO: adjust to be dynamic
   const name = req.body.name;
@@ -105,7 +105,7 @@ app.post('/users', async (req, res) => {
 });
 
 // Gabby
-app.patch('/users/:id', async (req, res) => {
+app.patch('/api/users/:id', async (req, res) => {
   // TODO
   var response = 0;
   if(req.body.name != null){

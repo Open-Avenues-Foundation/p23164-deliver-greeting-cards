@@ -32,7 +32,7 @@ async function getUpcomingEvents (client) {
   console.log('checking for date', datePlus7Days);
 
   const response = await client.query('SELECT * FROM events WHERE date = $1', [datePlus7Days]);
-  
+
   return response.rows;
 }
 
