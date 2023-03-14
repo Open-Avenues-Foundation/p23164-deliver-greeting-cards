@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200&family=Quicksand:wght@300;400;500;600;700&display=swap);
+
+* {
+  margin: 0; /* strips out the margin, standard */
+  font-family: "Nunito";
+  color: black;
+}
+
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(236, 231, 231, 0.781);
+}
+
+.navbar h1 {
+  color: rgb(15, 92, 207);
+}
+
+.navbar .link {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 40px;
+  text-decoration: none; /* Gets rid of underline*/
+}
+
+.home {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.navbar a:hover {
+  color: rgb(15, 92, 207)
+}
