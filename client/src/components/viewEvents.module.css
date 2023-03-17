@@ -1,0 +1,19 @@
+.tb {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .tb th,
+  .tb td { 
+    padding: 12px;
+    border: solid 1px #ddd; 
+    text-align: left;
+    font-weight: normal;
+    font-size: 14px;
+  }
+  
+  .tb th { 
+    background-color: rgb(15, 92, 207); 
+    color: white;
+  }
+  
