@@ -1,20 +1,30 @@
-# P23017-deliver-greeting-cards
+# Deliver Greeting Cards    
+
+This application allows users to automatically deliver greeting cards to users on specific dates via the [Lob](https://www.lob.com/) service. 
+
+There are three main components, a frontend written in React, an API written in Express.js, and a PostgreSQL database. 
 
 ## Configuration 
-If you are using GitHub Codespaces, all environment variables should already be available to you. 
 
-## Install Dependencies 
-`npm install`
+```
+cp .env.example .env
+```
 
-## Run the Script 
-`npm start`
+Then fill out the environment variables in the `.env` file. 
 
-## Insert a User 
-`npm run start:insert:user 'Karan Kwatra' 'adr_123'`
+## Frontend
+The code for the frontend exists in the `client` folder. 
 
-## Insert a Event
-`npm run start:insert:event 'event_type' '2022-10-28' '1'`
+To start the application: 
+```
+cd client
+npm install && npm start
+```
 
-Arguments: 
-1. user's name 
-2. user's Lob address id
+## Backend
+The code for the API exists in the `server.js` file. 
+
+To start the application: 
+```
+npm install && npm start
+```
