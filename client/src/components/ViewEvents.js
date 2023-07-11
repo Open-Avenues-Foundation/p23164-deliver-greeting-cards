@@ -58,7 +58,7 @@ export default class ViewEvents extends React.Component {
                             })}
                     </table>
                 </div>
-                <div className="userID">
+                <div className="home">
                     <h1>User ID</h1>
                     <table>
                             {this.state.events.map(event => {
