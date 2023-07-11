@@ -1,4 +1,4 @@
-import "./style/ViewUsers.css"
+import "./ViewUsers.css"
 import React, { useState, useEffect } from 'react'
 
 export const ViewUsers = () => {
