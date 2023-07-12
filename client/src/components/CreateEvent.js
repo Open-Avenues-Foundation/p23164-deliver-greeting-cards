@@ -1,7 +1,6 @@
-import { useState } from "react";
 import React from "react";
 import axios from "axios";
-import '../index.css';
+import './CreateEvent.css'
 
 export default class CreateEvent extends React.Component {
     state = {
@@ -55,7 +54,7 @@ export default class CreateEvent extends React.Component {
                     User Id:
                     <input type = "text" name = "userId" onChange = {this.handleUserIdName} />
                 </label>
-                <button type = "submit">Add event</button>
+                <button type = "submit">Add Event</button>
                 </form>
                 
             </div>
