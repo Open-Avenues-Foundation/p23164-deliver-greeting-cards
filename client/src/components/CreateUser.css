@@ -23,14 +23,21 @@ input{
     font-weight: normal;
 }
 
-.btn{
+.postUser {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 40px;
+    text-align: center;
+  }
 
-    width: 70px;
-    padding: 6px 10;
-    margin: 15px auto;
-    background-color: lightgrey;
-    border-radius: 5px;
-    color: white;
-    
+.postUser label {
+    text-align: left;
+    display: block;
+}
 
+.postUser input {
+    width: 100%;
+    padding: 6px 10px;
+    margin-top: 5px;
+    margin-bottom: 30px;
 }

@@ -36,10 +36,8 @@ export default class CreateUser extends React.Component {
 
     render() {
         return (
-            <div className="form"> 
-           
+            <div className="postUser"> 
                 <form onSubmit={this.handleSubmit}>
-                    <h1> Add a new user</h1>
                     <label>
                         Person Name:
                         <input type="text" name="name" onChange={this.handleChange}/>
@@ -50,7 +48,7 @@ export default class CreateUser extends React.Component {
                     <input type= "text" address_id="address_id" onChange={this.handleChange1}/>
                     </label>
     
-                    <button className = "btn" type="submit">Add</button>
+                    <button type="submit">Add User</button>
                 </form>
             </div>
         );
