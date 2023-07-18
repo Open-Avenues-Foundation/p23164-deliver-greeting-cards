@@ -1,9 +1,9 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const pg = require('pg');
+const pg = require("pg");
 
 // returns the postgres database client
-function getDBClient () {
+function getDBClient() {
   const client = new pg.Client({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -16,26 +16,26 @@ function getDBClient () {
 }
 
 // TODO: insert user into users table
-async function insertUser (name, address_id, client) {
-  const data_row = await client.query('INSERT INTO users (name, address_id) VALUES ($1, $2) Returning *', [
-    name,
-    address_id,
-  ]);
+async function insertUser(name, address_id, client) {
+  const data_row = await client.query(
+    "INSERT INTO users (name, address_id) VALUES ($1, $2) Returning *",
+    [name, address_id],
+  );
   return data_row.rows[0];
 }
 (async () => {
-    let client;
-    try {
-        client = getDBClient();
+  let client;
+  try {
+    client = getDBClient();
 
-        const name = process.argv[2];
-        const address_id = process.argv[3];
+    const name = process.argv[2];
+    const address_id = process.argv[3];
 
-        const user = await insertUser(name, address_id, client);
-        console.log(user);
-    } catch (e) {
-        console.log(e);
-    } finally {
-        client.end();
-    }
+    const user = await insertUser(name, address_id, client);
+    console.log(user);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    client.end();
+  }
 })();

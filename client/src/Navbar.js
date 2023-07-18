@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  return (  
+  return (
     <nav className="navbar">
       <Link to="/">
         <h1>Lob API to DB</h1>
@@ -14,6 +14,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-}
- 
+};
+
 export default Navbar;

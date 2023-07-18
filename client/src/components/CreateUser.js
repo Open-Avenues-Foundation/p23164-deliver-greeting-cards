@@ -1,56 +1,61 @@
-import React from 'react';
-import axios from 'axios';
-import './CreateUser.css'
+import React from "react";
+import axios from "axios";
+import "./CreateUser.css";
 
 export default class CreateUser extends React.Component {
-    state = {
-        name: '',
-        address_id: ''
-    }
+  state = {
+    name: "",
+    address_id: "",
+  };
 
-   
-    handleChange = event => {
-        this.setState({name : event.target.value});
-        console.log(event);
-        console.log(this.state);
-    }
-    handleChange1 = event => {
-        this.setState({address_id : event.target.value});
-        console.log(event);
-    }
+  handleNameChange = (event) => {
+    this.setState({ name: event.target.value });
+  };
 
-    handleSubmit = event => {
-        event.preventDefault();
-        const user = {
-            name: this.state.name,
-            address_id : this.state.address_id
-        };
+  handleAddressChange = (event) => {
+    this.setState({ address_id: event.target.value });
+  };
 
-        console.log(user);
-        axios.post(`https://deliver-greeting-cards.herokuapp.com/api/users`, {headers : {"content-type" : "application/JSON"}}, {user} )
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
-    }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const user = {
+      name: this.state.name,
+      address_id: this.state.address_id,
+    };
 
-    render() {
-        return (
-            <div className="postUser"> 
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Person Name:
-                        <input type="text" name="name" onChange={this.handleChange}/>
-                    </label>
-                
-                    <label>
-                        Address ID:
-                    <input type= "text" address_id="address_id" onChange={this.handleChange1}/>
-                    </label>
-    
-                    <button type="submit">Add User</button>
-                </form>
-            </div>
-        );
-    }
+    axios
+      .post(
+        `https://deliver-greeting-cards.herokuapp.com/api/users`,
+        { headers: { "content-type": "application/JSON" } },
+        { user },
+      )
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
+  };
+
+  render() {
+    return (
+      <div className="postUser">
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Person Name:
+            <input type="text" name="name" onChange={this.handleNameChange} />
+          </label>
+
+          <label>
+            Address ID:
+            <input
+              type="text"
+              address_id="address_id"
+              onChange={this.handleAddressChange}
+            />
+          </label>
+
+          <button type="submit">Add User</button>
+        </form>
+      </div>
+    );
+  }
 }

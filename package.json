@@ -28,5 +28,8 @@
     "lob": "^6.6.3",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
   }
 }
