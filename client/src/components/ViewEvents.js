@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import "./viewEvents.module.css";
+import "./ViewEvents.css";
 
 export default class ViewEvents extends React.Component {
   constructor(props) {
@@ -20,6 +20,14 @@ export default class ViewEvents extends React.Component {
       });
   }
 
+  handleDeleteEvent = (id) => {
+    axios
+      .delete(`https://deliver-greeting-cards.herokuapp.com/api/events/${id}`)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
+  }
   render() {
     return (
       <div className="header">
@@ -64,8 +72,9 @@ export default class ViewEvents extends React.Component {
           <table>
             {this.state.events.map((event) => {
               return (
-                <tr key={event.id}>
+                <tr className="userID" key={event.id} >
                   <td>{event.user_id}</td>
+                  <button onClick={() => this.handleDeleteEvent(event.id)}>Delete entry</button>
                 </tr>
               );
             })}
