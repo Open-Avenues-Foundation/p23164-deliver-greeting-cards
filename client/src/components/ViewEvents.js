@@ -24,10 +24,12 @@ export default class ViewEvents extends React.Component {
     axios
       .delete(`https://deliver-greeting-cards.herokuapp.com/api/events/${id}`)
       .then((res) => {
+        console.log('DELETED!!');
         console.log(res);
         console.log(res.data);
       });
   }
+
   render() {
     return (
       <div className="header">
