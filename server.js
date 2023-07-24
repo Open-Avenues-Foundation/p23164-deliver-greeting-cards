@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
+app.use(cors());
+app.use(express.json());
 
 const port = process.env.PORT || 3000;
 
@@ -16,8 +18,6 @@ const client = new pg.Client({
   port: process.env.DB_PORT,
 });
 client.connect();
-
-app.use(express.json());
 
 app.get("/api", (req, res) => {
   res.send("Hello World!");
