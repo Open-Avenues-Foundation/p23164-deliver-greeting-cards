@@ -119,6 +119,12 @@ app.patch("/api/users/:id", async (req, res) => {
   res.send(response.rows);
 });
 
+app.delete("/api/events/:id", async (req, res) => {
+  const id = req.params.id;
+  const response = await client.query("DELETE FROM events WHERE id=$1", [id]);
+  res.send(response.rows);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
