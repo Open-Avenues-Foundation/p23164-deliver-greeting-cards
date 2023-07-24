@@ -20,7 +20,7 @@ export default class ViewEvents extends React.Component {
       });
   }
 
-  handleDeleteEvent = (id) => {
+  handleDeleteEvent = id => {
     axios
       .delete(`https://deliver-greeting-cards.herokuapp.com/api/events/${id}`)
       .then((res) => {
@@ -69,12 +69,12 @@ export default class ViewEvents extends React.Component {
             })}
           </table>
         </div>
-        <div className="home">
+        <div className="home userID">
           <h1>User ID</h1>
           <table>
             {this.state.events.map((event) => {
               return (
-                <tr className="userID" key={event.id} >
+                <tr key={event.id}>
                   <td>{event.user_id}</td>
                   <button onClick={() => this.handleDeleteEvent(event.id)}>Delete entry</button>
                 </tr>
