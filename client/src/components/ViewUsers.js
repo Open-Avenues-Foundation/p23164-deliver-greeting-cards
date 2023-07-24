@@ -24,36 +24,67 @@ export const ViewUsers = () => {
     fetchText();
   }, []);
 
-  return (
-    <div>
-      <div className="header">
-        <div className="home">
-          <h1>Name</h1>
-          <table>
-            {name.map((data, i) => {
-              return (
-                <tr key={i}>
-                  <td>{data.name ? data.name : "Tameem"}</td>
-                </tr>
-              );
-            })}
-          </table>
-        </div>
-        <div className="home">
-          <h1>Address ID</h1>
-          <table>
-            {name.map((data, i) => {
-              return (
-                <tr key={i}>
-                  <td>{data.address_id ? data.address_id : "09182391028"}</td>
-                </tr>
-              );
-            })}
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-};
+    useEffect(() => {
+        fetchText()
+    }, [])
 
+    const handleDelete = async (id) => {
+      try {
+        const response = await fetch(`https://deliver-greeting-cards.herokuapp.com/api/users/${id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" }, 
+        });
+        console.log(response); 
+        window.location.reload(); 
+      }
+        catch (err) { 
+            console.error("Error deleting user", err.message); 
+        }
+    };
+
+
+    return (
+        <div>
+            <div className="header">
+                <div className="home">
+                    <h1>Name</h1>
+                    <table>
+                            {name.map((data, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td>{data.name ? data.name : "Tameem"}</td>
+                                    </tr>
+                                )
+                            })}
+                    </table>
+                </div>
+                <div className="home">
+                    <h1>Address ID</h1>
+                    <table>
+                            {name.map((data, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td>{data.address_id ? data.address_id : "09182391028"}</td>
+                                    </tr>
+                                )
+                            })}
+                    </table>
+                </div>
+                <div className="home">
+                    <h1>Delete</h1>                            
+                    <table>
+                            {name.map((data, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <button onClick={() => handleDelete(data.id)}>Delete</button>
+                                    </tr>
+                                )
+                            })}
+    
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+                        }
 export default ViewUsers;
