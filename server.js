@@ -125,6 +125,7 @@ app.delete("/api/events/:id", async (req, res) => {
   const id = req.params.id;
   const response = await client.query("DELETE FROM events WHERE id=$1", [id]);
   res.send(response.rows);
+});
 
 
 // this endpoint should delete a user by its id
