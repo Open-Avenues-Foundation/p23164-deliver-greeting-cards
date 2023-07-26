@@ -22,3 +22,20 @@ td {
 tr:nth-child(even) {
   background-color: lightgray;
 }
+
+button{
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+div.userID td {
+  margin: 0;
+}
+
+div.userID tr {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
