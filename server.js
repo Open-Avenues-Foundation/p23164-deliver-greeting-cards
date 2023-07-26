@@ -2,11 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const pg = require("pg");
 require('dotenv').config();
+const cors = require("cors");
 
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
+app.use(cors());
+app.use(express.json());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5001;
 
 const client = new pg.Client({
   user: process.env.DB_USER,
@@ -16,8 +19,6 @@ const client = new pg.Client({
   port: process.env.DB_PORT,
 });
 client.connect();
-
-app.use(express.json());
 
 app.get("/api", (req, res) => {
   res.send("Hello World!");
@@ -124,6 +125,18 @@ app.delete("/api/events/:id", async (req, res) => {
   const id = req.params.id;
   const response = await client.query("DELETE FROM events WHERE id=$1", [id]);
   res.send(response.rows);
+
+
+// this endpoint should delete a user by its id
+app.delete('/api/users/:id', async (req, res) => {
+  if (req.params.id == null){ 
+    res.status(404).send('HTTP Not Found Error'); 
+    return;
+  }
+  if (req.params.id != null){
+    const response = await client.query('DELETE FROM users WHERE id = $1', [req.params.id]); 
+    res.send(response.rows); 
+  }
 });
 
 app.listen(port, () => {
