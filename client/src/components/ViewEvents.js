@@ -28,6 +28,8 @@ export default class ViewEvents extends React.Component {
         console.log(res);
         console.log(res.data);
       });
+    const updatedEvents = this.state.events.filter(event => event.id !== id);
+    this.setState({ events: updatedEvents });
   }
 
   render() {
