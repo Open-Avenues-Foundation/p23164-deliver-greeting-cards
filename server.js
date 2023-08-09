@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const pg = require("pg");
 require('dotenv').config();
 const cors = require("cors");
+const Lob = require('lob')(process.env.LOB_API_KEY);
 
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
@@ -128,7 +129,7 @@ app.delete("/api/events/:id", async (req, res) => {
 });
 
 
-// this endpoint should delete a user by its id
+// this endpoint should delete a user by its id -- IMADE
 app.delete('/api/users/:id', async (req, res) => {
   if (req.params.id == null){ 
     res.status(404).send('HTTP Not Found Error'); 
@@ -139,6 +140,13 @@ app.delete('/api/users/:id', async (req, res) => {
     res.send(response.rows); 
   }
 });
+
+// This endpoint should retrieve the list of addresses that are stored in Lob's system using the Lobe Node SDK -- IMADE
+app.get('/api/addresses', async (req, res) => {
+    const response = await Lob.addresses.list();
+    res.send(response); 
+  });
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
