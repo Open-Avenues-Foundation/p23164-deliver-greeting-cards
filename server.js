@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const pg = require("pg");
 require('dotenv').config();
 const cors = require("cors");
+const Lob = require("lob")(process.env.LOB_API_KEY);
 
 const app = express();
 app.use(bodyParser.json()); // for parsing application/json
@@ -139,6 +140,12 @@ app.delete('/api/users/:id', async (req, res) => {
     res.send(response.rows); 
   }
 });
+
+// retrieves the list of postcards that have been sent through Lob’s system using the Lob Node SDK
+app.get('/api/postcards', async (req, res) => {
+  const response = await Lob.postcards.list();
+  res.send(response);
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
