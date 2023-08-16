@@ -147,6 +147,11 @@ app.get('/api/addresses', async (req, res) => {
     res.send(response); 
   });
 
+// retrieves the list of postcards that have been sent through Lob’s system using the Lob Node SDK
+app.get('/api/postcards', async (req, res) => {
+  const response = await Lob.postcards.list();
+  res.send(response);
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
