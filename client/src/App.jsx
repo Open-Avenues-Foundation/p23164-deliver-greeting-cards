@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import Home from "./Home";
-import CreateUser from "./components/CreateUser";
-import ViewUsers from "./components/ViewUsers";
-import CreateEvent from "./components/CreateEvent";
-import ViewEvents from "./components/ViewEvents";
+import CreateUser from "./components/CreateUser/CreateUser";
+import ViewUsers from "./components/ViewUsers/ViewUsers";
+import CreateEvent from "./components/CreateEvent/CreateEvent";
+import ViewEvents from "./components/ViewEvents/ViewEvents";
 
 function App() {
   return (

@@ -58,7 +58,7 @@ export default class CreateEvent extends React.Component {
           <label>
             User Id:
             <input type="text" name="userId" onChange={this.handleUserIdName} />
-          </label>
+        </label>
           <button type="submit">Add Event</button>
         </form>
       </div>
