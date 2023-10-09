@@ -39,3 +39,15 @@ div.userID tr {
   justify-content: space-between;
   align-items: center;
 }
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.header {
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 45%; 
+}
