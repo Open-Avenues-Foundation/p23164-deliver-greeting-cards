@@ -4,26 +4,27 @@ import "./Event.css";
 
 export default class CreateEvent extends React.Component {
     state = {
-    eventType: "",
-    date: "",
-    userId: "",
+        eventType: "",
+        date: "",
+        userId: "",
     };
-
+    
     handleEventName = (event) => {
-    this.setState({ eventType: event.target.value });
-    console.log(this.state);
+        this.setState({ eventType: event.target.value });
+        console.log(this.state);
     };
     handleDateName = (event) => {
-    this.setState({ date: event.target.value });
-    console.log(this.state);
+        this.setState({ date: event.target.value });
+        console.log(this.state);
     };
     handleUserIdName = (event) => {
-    this.setState({ userId: event.target.value });
-    console.log(this.state);
+        this.setState({ userId: event.target.value });
+        console.log(this.state);
     };
-
+    
     handleSubmit = (event) => {
         event.preventDefault();
+    
         const data = {
             event_type: this.state.eventType,
             date: this.state.date,
@@ -31,19 +32,21 @@ export default class CreateEvent extends React.Component {
         };
     
         axios
-        .post(
-        `https://deliver-greeting-cards.herokuapp.com/api/users`,
-        { name: this.state.name,
-        address_id: this.state.address_id },
-        { headers: { "content-type": "application/JSON" } },
-        )
-            .then((res) => {
-                console.log(res);
-                console.log(res.data);
-                this.setState({ events: res.data });
-            })
-    };
+        .post("https://deliver-greeting-cards.herokuapp.com/api/events", data)
+        .then((response) => {
+            console.log('ADDED!!');
+            console.log(response);
+            console.log(response.data);
     
+            // Assuming response.data contains the newly created event object
+            this.setState(prevState => ({
+                events: [...prevState.events, response.data]
+            }));
+        })
+        .catch(error => {
+            console.error('Error adding event:', error);
+        });
+    };
 
     constructor(props) {
         super(props);
@@ -61,6 +64,8 @@ export default class CreateEvent extends React.Component {
             this.setState({ events });
         });
     }
+    
+
     
     handleDeleteEvent = id => {
         axios
