@@ -31,16 +31,17 @@ export default class CreateEvent extends React.Component {
         };
     
         axios
-            .post("https://deliver-greeting-cards.herokuapp.com/api/events", data)
+        .post(
+        `https://deliver-greeting-cards.herokuapp.com/api/users`,
+        { name: this.state.name,
+        address_id: this.state.address_id },
+        { headers: { "content-type": "application/JSON" } },
+        )
             .then((res) => {
                 console.log(res);
                 console.log(res.data);
-                // Assuming the server responds with the updated list of events
                 this.setState({ events: res.data });
             })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
     };
     
 
