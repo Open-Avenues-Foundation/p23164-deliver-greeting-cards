@@ -23,11 +23,12 @@ export default class CreateUser extends React.Component {
       address_id: this.state.address_id,
     };
 
-    axios
+     axios
       .post(
         `https://deliver-greeting-cards.herokuapp.com/api/users`,
+        { name: this.state.name,
+	  address_id: this.state.address_id },
         { headers: { "content-type": "application/JSON" } },
-        { user },
       )
       .then((res) => {
         console.log(res);
