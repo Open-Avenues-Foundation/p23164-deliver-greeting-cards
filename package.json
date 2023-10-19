@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "send": "node index.js",
     "insert:user": "node scripts/insert-user.js",
     "insert:event": "node scripts/insert-event.js",
