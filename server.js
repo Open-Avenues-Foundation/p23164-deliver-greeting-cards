@@ -1,8 +1,11 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const pg = require("pg");
 require('dotenv').config();
+
 const cors = require("cors");
+const express = require("express");
+
+const bodyParser = require("body-parser");
+const path = require("path");
+const pg = require("pg");
 const Lob = require('lob')(process.env.LOB_API_KEY);
 
 const app = express();
