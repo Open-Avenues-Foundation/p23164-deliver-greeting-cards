@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import "./Event.css";
+
 
 export default class CreateEvent extends React.Component {
     state = {

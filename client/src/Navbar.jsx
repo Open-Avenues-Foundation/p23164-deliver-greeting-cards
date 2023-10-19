@@ -7,8 +7,7 @@ const Navbar = () => {
         <h1>Lob API to DB</h1>
       </Link>
       <div className="links">
-        <Link to="/postuser">Add a new user</Link>
-        <Link to="/getusers">View all users</Link>
+        <Link to="/Users">Users</Link>
         <Link to="/events">Events</Link>
       </div>
     </nav>
