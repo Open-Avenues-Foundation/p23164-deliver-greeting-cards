@@ -8,9 +8,8 @@ const Navbar = () => {
       </Link>
       <div className="links">
         <Link to="/postuser">Add a new user</Link>
-        <Link to="/postevent">Add a new event</Link>
         <Link to="/getusers">View all users</Link>
-        <Link to="/getevents">View all events</Link>
+        <Link to="/events">Events</Link>
       </div>
     </nav>
   );

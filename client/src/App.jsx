@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import Home from "./Home";
-import CreateUser from "./components/CreateUser";
-import ViewUsers from "./components/ViewUsers";
-import CreateEvent from "./components/CreateEvent";
-import ViewEvents from "./components/ViewEvents";
-
+import CreateUser from "./components/CreateUser/CreateUser";
+import ViewUsers from "./components/ViewUsers/ViewUsers";
+import CreateEvent from "./components/CreateEvent/CreateEvent";
+import ViewEvents from "./components/ViewEvents/ViewEvents";
+import Events from "./components/Events/Event"
 function App() {
   return (
     <Router>
@@ -18,6 +18,7 @@ function App() {
           <Route path="/getusers" element={<ViewUsers />} />
           <Route path="/postevent" element={<CreateEvent />} />
           <Route path="/getevents" element={<ViewEvents />} />
+          <Route path="/events" element={<Events />} />
         </Routes>
       </div>
     </Router>

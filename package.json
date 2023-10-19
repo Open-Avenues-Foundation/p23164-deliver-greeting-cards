@@ -14,6 +14,9 @@
     "type": "git",
     "url": "git+https://github.com/Open-Avenues-Foundation/p23017-deliver-greeting-cards.git"
   },
+  "keywords": [
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -31,5 +34,9 @@
   },
   "devDependencies": {
     "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": "18.17.1",
+    "npm": "9.6.7"
   }
 }
