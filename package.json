@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "send": "node index.js",
     "insert:user": "node scripts/insert-user.js",
@@ -35,9 +35,5 @@
   },
   "devDependencies": {
     "prettier": "^3.0.0"
-  },
-  "engines": {
-    "node": "18.17.1",
-    "npm": "9.6.7"
   }
 }

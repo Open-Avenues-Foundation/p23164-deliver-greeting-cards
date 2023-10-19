@@ -13,6 +13,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(cors());
 app.use(express.json());
 
+// to serve the react application as a static build
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 const port = process.env.PORT || 5001;
