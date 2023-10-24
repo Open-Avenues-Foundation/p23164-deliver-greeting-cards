@@ -7,6 +7,7 @@ import ViewUsers from "./components/ViewUsers/ViewUsers";
 import CreateEvent from "./components/CreateEvent/CreateEvent";
 import ViewEvents from "./components/ViewEvents/ViewEvents";
 import Events from "./components/Events/Event"
+import Users from "./components/Users/Users"
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
           <Route path="/postevent" element={<CreateEvent />} />
           <Route path="/getevents" element={<ViewEvents />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/users" element={<Users />} />
         </Routes>
       </div>
     </Router>

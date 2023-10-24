@@ -47,8 +47,12 @@ export const ViewUsers = () => {
         <div>
             <div className="header">
                 <div className="home">
-                    <h1>Name</h1>
+                    
                     <table>
+                      <thead>
+                          <tr>
+                            <th className = "header-cell">Name</th></tr>
+                          </thead>
                             {name.map((data, i) => {
                                 return (
                                     <tr key={i}>
@@ -59,8 +63,12 @@ export const ViewUsers = () => {
                     </table>
                 </div>
                 <div className="home">
-                    <h1>Address ID</h1>
+                    
                     <table>
+                    <thead>
+                          <tr>
+                            <th className = "header-cell">Address ID</th></tr>
+                          </thead>
                             {name.map((data, i) => {
                                 return (
                                     <tr key={i}>
@@ -70,19 +78,24 @@ export const ViewUsers = () => {
                             })}
                     </table>
                 </div>
-                <div className="home">
-                    <h1>Delete</h1>                            
-                    <table>
-                            {name.map((data, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <button onClick={() => handleDelete(data.id)}>Delete</button>
-                                    </tr>
-                                )
-                            })}
-    
-                    </table>
-                </div>
+                <div className="home butt">
+                          
+  <table>
+  <thead>
+                          <tr>
+                            <th className = "header-cell">Delete</th></tr>
+                          </thead>
+    {name.map((data, i) => {
+      return (
+        <tr key={i} className={i === name.length - 1 ? "last-row" : ""}>
+          <td>
+            <button onClick={() => handleDelete(data.id)}>Delete</button>
+          </td>
+        </tr>
+      )
+    })}
+  </table>
+</div>
             </div>
         </div>
     );

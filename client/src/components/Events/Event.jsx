@@ -96,7 +96,7 @@ export default class CreateEvent extends React.Component {
                 <input type="text" name="date" onChange={this.handleDateName} />
             </label>
             <label>
-                User Id:
+                User ID:
                 <input type="text" name="userId" onChange={this.handleUserIdName} />
             </label>
             <button type="submit">Add Event</button>
@@ -178,7 +178,7 @@ export default class CreateEvent extends React.Component {
             </tbody>
         </table>
     </div>
-    <div className="home">
+    <div className="home butt">
     
         <thead>
             <tr>

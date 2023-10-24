@@ -7,15 +7,15 @@ body, html, div {
 /* The main container box */
 .Event {
     display: flex;
-    width: 100vw; /* Takes the full viewport width */
-    min-height: 50vh; /* Minimum height, can adjust as needed */
+    
+    min-height: 100vh; /* Minimum height, can adjust as needed */
     justify-content: space-between; /* This will ensure any space is distributed between the two boxes */
     padding: 2em; /* Gives some space inside the large box */
 }
 
 /* The two smaller boxes inside */
-.postEvent, .Table {
-    flex: 1; /* This ensures both boxes take up even space */
+.postEvent {
+    width: 30%; /* Sets the width to 30% of the parent container */
     padding: 1em; /* Space inside each box */
     margin: 0 1em; /* Space outside each box. Adjust as needed */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a slight shadow for depth */
@@ -23,9 +23,10 @@ body, html, div {
 }
 
 
+
 .postEvent input[type="text"] {
     flex: 1; /* This allows it to occupy the remaining space */
-    max-width: 92%; /* You can adjust this as needed, e.g., 50% would make it half the width of its container */
+    max-width: 83%; /* You can adjust this as needed, e.g., 50% would make it half the width of its container */
     margin-left: 10px; /* Optional: Add some space between the label and the input */
 }
 
@@ -58,7 +59,7 @@ button[type="submit"]:active {
 
 /* Style for the table headers */
 .header-cell {
-    width: 200px; /* Adjust width as needed */
+
     text-align: center;
     background-color: #009879; /* Background color for headers */
     color: #ffffff; /* Text color for headers */
@@ -68,7 +69,7 @@ button[type="submit"]:active {
 
 /* Style for table data cells */
 .home td {
-    width: 200px; /* Adjust width as needed */
+    width: 100vw; /* Takes the full viewport width */
     text-align: center;
     padding: 12px 15px; /* Padding for data cells */
 }
@@ -106,11 +107,15 @@ button[type="submit"]:active {
 }
 
 .home table {
-    width: 400px; /* Adjust width as needed */
+    width: 100%; /* Adjust width as needed */
     border-collapse: separate;
     border-spacing: 0;
     border-radius: 10px; /* Adjust radius for desired roundness */
     overflow: hidden;
+}
+
+.butt{
+    width: 10% !important;
 }
 
 .size tr{
@@ -119,3 +124,5 @@ button[type="submit"]:active {
 .size table{
     width: 20px;
 }
+
+
