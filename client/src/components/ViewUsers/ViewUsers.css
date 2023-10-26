@@ -26,7 +26,11 @@ tr:nth-child(even) {
   background-color: lightgrey;
 }
 
-.butt{
+.butto{
   width: 10% !important;
+  margin-left: 11vh !important;
 }
 
+.addr{
+  width: 45% !important;
+}

@@ -3,10 +3,23 @@ import axios from "axios";
 import "./CreateUser.css";
 
 export default class CreateUser extends React.Component {
-  state = {
-    name: "",
-    address_id: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      address_id: "",
+      events: [],
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("https://deliver-greeting-cards.herokuapp.com/api/events")
+      .then((res) => {
+        const events = res.data;
+        this.setState({ events });
+      });
+  }
 
   handleNameChange = (event) => {
     this.setState({ name: event.target.value });
@@ -18,21 +31,22 @@ export default class CreateUser extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const user = {
+    const data = {
       name: this.state.name,
       address_id: this.state.address_id,
     };
 
-     axios
-      .post(
-        `https://deliver-greeting-cards.herokuapp.com/api/users`,
-        { name: this.state.name,
-	  address_id: this.state.address_id },
-        { headers: { "content-type": "application/JSON" } },
-      )
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
+    axios
+      .post("https://deliver-greeting-cards.herokuapp.com/api/users", data)
+      .then((response) => {
+        console.log('ADDED!!');
+        console.log(response);
+        console.log(response.data);
+        // Reloading the page
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error adding event:', error);
       });
   };
 
@@ -44,16 +58,10 @@ export default class CreateUser extends React.Component {
             Person Name:
             <input type="text" name="name" onChange={this.handleNameChange} />
           </label>
-
           <label>
             Address ID:
-            <input
-              type="text"
-              address_id="address_id"
-              onChange={this.handleAddressChange}
-            />
+            <input type="text" name="address_id" onChange={this.handleAddressChange} />
           </label>
-
           <button type="submit">Add User</button>
         </form>
       </div>

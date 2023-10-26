@@ -3,7 +3,23 @@ import React, { useState, useEffect } from "react";
 
 export const ViewUsers = () => {
   const [name, setName] = useState([]);
+  const [addresses, setAddresses] = useState([]);
 
+  useEffect(() => {
+    fetch('https://deliver-greeting-cards.herokuapp.com/api/addresses', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      const addressIds = data.data.map(address => address.id);
+      setAddresses(addressIds);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+  }, []);
+  
   async function fetchText() {
     let response = await fetch(
       "https://deliver-greeting-cards.herokuapp.com/api/users",
@@ -24,10 +40,9 @@ export const ViewUsers = () => {
     fetchText();
   }, []);
 
-    useEffect(() => {
-        fetchText()
-    }, [])
 
+
+    
     const handleDelete = async (id) => {
       try {
         const response = await fetch(`https://deliver-greeting-cards.herokuapp.com/api/users/${id}`, {
@@ -62,22 +77,36 @@ export const ViewUsers = () => {
                             })}
                     </table>
                 </div>
-                <div className="home">
-                    
-                    <table>
-                    <thead>
-                          <tr>
-                            <th className = "header-cell">Address ID</th></tr>
-                          </thead>
-                            {name.map((data, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td>{data.address_id ? data.address_id : "09182391028"}</td>
-                                    </tr>
-                                )
-                            })}
-                    </table>
-                </div>
+                <div className="home addr">
+    <table>
+        <thead>
+            <tr>
+                <th className="header-cell">Address ID</th>
+            </tr>
+        </thead>
+        <tbody>
+    {name.map((data, i) => {
+        const isMatch = addresses.includes(data.address_id);
+        return (
+            <tr key={i}>
+                <td>
+                    {isMatch ? (
+                        <a href={`https://dashboard.lob.com/addresses/${data.address_id}`}>
+                            {data.address_id}
+                        </a>
+                    ) : (
+                        data.address_id || "N/A"  
+                    )}
+                </td>
+            </tr>
+        );
+    })}
+</tbody>
+
+
+    </table>
+</div>
+
                 <div className="home butt">
                           
   <table>
