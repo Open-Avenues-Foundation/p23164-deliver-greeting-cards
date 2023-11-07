@@ -14,7 +14,7 @@
 }
 
 .ViewUserContainer {
-    width: 70wh !important;
+    width: 100wh !important;
 }
 .CreateUserContainer input[type="text"], .ViewUserContainer input[type="text"] {
     flex: 1;
