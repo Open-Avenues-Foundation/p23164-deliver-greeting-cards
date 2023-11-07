@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  width: 70vh !important;
 }
 
 table {
@@ -24,3 +25,8 @@ td {
 tr:nth-child(even) {
   background-color: lightgrey;
 }
+
+.butt{
+  width: 10% !important;
+}
+
