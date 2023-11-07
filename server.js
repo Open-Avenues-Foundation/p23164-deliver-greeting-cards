@@ -1,8 +1,11 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const pg = require("pg");
 require('dotenv').config();
+
 const cors = require("cors");
+const express = require("express");
+
+const bodyParser = require("body-parser");
+const path = require("path");
+const pg = require("pg");
 const Lob = require('lob')(process.env.LOB_API_KEY);
 
 const app = express();
@@ -10,7 +13,9 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(cors());
 app.use(express.json());
 
+// to serve the react application as a static build
 app.use(express.static(path.resolve(__dirname, "./client/build")));
+
 const port = process.env.PORT || 5001;
 
 const client = new pg.Client({
