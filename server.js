@@ -162,3 +162,10 @@ app.get('/api/postcards', async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+// this endpoint should return all auth_users in the database
+// This is new, if something breaks delete everything under
+app.get("/api/auth_users", async (req, res) => {
+  const response = await client.query("SELECT * FROM auth_users");
+  res.send(response.rows);
+});
