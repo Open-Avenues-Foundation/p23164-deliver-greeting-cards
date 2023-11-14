@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-
+import LoginButton from './LoginButton'; 
+import './testcomponent.css';
 export default class TestComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -28,15 +29,20 @@ export default class TestComponent extends React.Component {
     render() {
         // Directly displaying fetched user data as text
         return (
+            
             <div>
+                <div className="loginbutton"><LoginButton /> </div>
+                
                 {this.state.users.map((user) => (
                     <div key={user.id}>
                         <p>ID: {user.id}</p>
                         <p>Email: {user.email}</p>
                         <p>Username: {user.username}</p>
-                    </div>
+                        
+                    </div>      
                 ))}
             </div>
+            
         );
     }
 }
