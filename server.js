@@ -112,15 +112,18 @@ app.get("/api/users/:id", async (req, res) => {
 
 // this endpoint should create a new user in the database
 app.post("/api/users", async (req, res) => {
-  const name = req.body.name;
-  const address_id = req.body.address_id;
-  const data_row = await client.query(
-    "INSERT INTO users (name, address_id) VALUES ($1, $2) Returning *",
-    [name, address_id],
-  );
-  res.send(data_row.rows[0]);
+  const { name, address_id, application_user_id } = req.body; // Destructuring for clarity
+  try {
+    const data_row = await client.query(
+      "INSERT INTO users (name, address_id, application_user_id) VALUES ($1, $2, $3) RETURNING *",
+      [name, address_id, application_user_id]
+    );
+    res.send(data_row.rows[0]);
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).send('Error creating user');
+  }
 });
-
 // this endpoint should update a user by its id
 app.patch("/api/users/:id", async (req, res) => {
   var response = 0;

@@ -1,18 +1,23 @@
 import React from "react";
 import axios from "axios";
 import "./CreateUser.css";
-
-export default class CreateUser extends React.Component {
+import { withAuth0 } from "@auth0/auth0-react";
+class CreateUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
       address_id: "",
       events: [],
+      application_user_id: "", // To be set from Auth0 user info
     };
   }
 
   componentDidMount() {
+    const { auth0 } = this.props;
+    if (auth0 && auth0.isAuthenticated) {
+      this.setState({ application_user_id: auth0.user.sub });
+  }
     axios
       .get("https://deliver-greeting-cards.herokuapp.com/api/events")
       .then((res) => {
@@ -34,6 +39,7 @@ export default class CreateUser extends React.Component {
     const data = {
       name: this.state.name,
       address_id: this.state.address_id,
+      application_user_id: this.state.application_user_id,
     };
 
     axios
@@ -68,3 +74,4 @@ export default class CreateUser extends React.Component {
     );
   }
 }
+export default withAuth0(CreateUser);

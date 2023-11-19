@@ -1,15 +1,16 @@
 import React from "react";
 import axios from "axios";
 import "./Event.css";
-
-export default class CreateEvent extends React.Component {
+import { withAuth0 } from "@auth0/auth0-react";
+export class CreateEvent extends React.Component {
     state = {
+        events: [],
         eventType: "",
         date: "",
-        userId: "",   
-        application_user_id: "",
+        userId: "",
+        application_user_id: "", // To be set from Auth0 user info
     };
-    
+
     handleEventName = (event) => {
         this.setState({ eventType: event.target.value });
         console.log(this.state);
@@ -22,10 +23,7 @@ export default class CreateEvent extends React.Component {
         this.setState({ userId: event.target.value });
         console.log(this.state);
     };
-    handleApplicationUserIdName = (event) => {
-        this.setState({ application_user_id: event.target.value });
-        console.log(this.state);
-    };
+
     handleSubmit = (event) => {
         event.preventDefault();
     
@@ -53,24 +51,36 @@ export default class CreateEvent extends React.Component {
         });
     };
 
+
     constructor(props) {
         super(props);
         this.state = {
-        events: [],
+            events: [],
+            eventType: "",
+            date: "",
+            userId: "",
+            application_user_id: "", // Will be set from Auth0 user info
         };
     }
+
+    
     
     componentDidMount() {
+        const { user, isAuthenticated } = this.props.auth0;
+        if (isAuthenticated && user) {
+            this.setState({ application_user_id: user.sub });
+        }
         axios
         .get("https://deliver-greeting-cards.herokuapp.com/api/events")
         .then((res) => {
             const events = res.data;
             console.log(events);
             this.setState({ events });
+            this.setState({ events: res.data });
         });
     }
     
-
+    
     
     handleDeleteEvent = id => {
         axios
@@ -104,10 +114,6 @@ export default class CreateEvent extends React.Component {
             <label>
                 User ID:
                 <input type="text" name="userId" onChange={this.handleUserIdName} />
-            </label>
-            <label>
-                Application User ID:
-                <input type="text" name="application_user_id" onChange={this.handleApplicationUserIdName} />
             </label>
             <button type="submit">Add Event</button>
             </form>
@@ -214,5 +220,8 @@ export default class CreateEvent extends React.Component {
 
     </div>
         );
+        
     }
+    
     }
+    export default withAuth0(CreateEvent);
