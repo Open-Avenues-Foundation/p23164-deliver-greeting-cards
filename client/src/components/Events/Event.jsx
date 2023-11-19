@@ -6,7 +6,8 @@ export default class CreateEvent extends React.Component {
     state = {
         eventType: "",
         date: "",
-        userId: "",
+        userId: "",   
+        application_user_id: "",
     };
     
     handleEventName = (event) => {
@@ -21,7 +22,10 @@ export default class CreateEvent extends React.Component {
         this.setState({ userId: event.target.value });
         console.log(this.state);
     };
-    
+    handleApplicationUserIdName = (event) => {
+        this.setState({ application_user_id: event.target.value });
+        console.log(this.state);
+    };
     handleSubmit = (event) => {
         event.preventDefault();
     
@@ -29,8 +33,9 @@ export default class CreateEvent extends React.Component {
             event_type: this.state.eventType,
             date: this.state.date,
             user_id: this.state.userId,
+            application_user_id: this.state.application_user_id
         };
-    
+        console.log(data); // Just before axios.post to log the payload
         axios
         .post("https://deliver-greeting-cards.herokuapp.com/api/events", data)
         .then((response) => {
@@ -91,6 +96,7 @@ export default class CreateEvent extends React.Component {
                 onChange={this.handleEventName}
                 />
             </label>
+            
             <label>
                 Date:
                 <input type="text" name="date" onChange={this.handleDateName} />
@@ -98,6 +104,10 @@ export default class CreateEvent extends React.Component {
             <label>
                 User ID:
                 <input type="text" name="userId" onChange={this.handleUserIdName} />
+            </label>
+            <label>
+                Application User ID:
+                <input type="text" name="application_user_id" onChange={this.handleApplicationUserIdName} />
             </label>
             <button type="submit">Add Event</button>
             </form>

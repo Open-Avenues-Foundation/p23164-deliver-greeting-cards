@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import LoginButton from './LoginButton'; 
-import './testcomponent.css';
+import LoginButton from './hooks/LoginButton'; 
+import Profile from './hooks/Profile';
+import './LoginComponent.css';
 export default class TestComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -10,10 +11,6 @@ export default class TestComponent extends React.Component {
         };
     }
 
-    // Fetch users data from the server when the component mounts
-    componentDidMount() {
-        this.fetchUsers();
-    }
 
     fetchUsers = () => {
         axios
@@ -31,8 +28,14 @@ export default class TestComponent extends React.Component {
         return (
             
             <div>
+                
+                <div className="Profile Display">
+                    <Profile />
+                </div>
+                
                 <div className="loginbutton"><LoginButton /> </div>
                 
+
                 {this.state.users.map((user) => (
                     <div key={user.id}>
                         <p>ID: {user.id}</p>

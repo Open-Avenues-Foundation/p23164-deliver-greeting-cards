@@ -47,15 +47,19 @@ app.get("/api/events/:id", async (req, res) => {
 
 // this endpoint should create a new event in the database
 app.post("/api/events", async (req, res) => {
-  const event_type = req.body.event_type;
+  console.log(req.body); // Right inside the POST endpoint
+
+  const event_type = req.body.event_type;                                         
   const date = req.body.date;
   const user_id = req.body.user_id;
+  const application_user_id = req.body.application_user_id;
   const response = await client.query(
-    "INSERT INTO events (event_type, date, user_id) VALUES($1, $2, $3) RETURNING *",
-    [event_type, date, user_id],
+    "INSERT INTO events (event_type, date, user_id, application_user_id) VALUES($1, $2, $3, $4) RETURNING *",
+    [event_type, date, user_id, application_user_id],
   );
   res.send(response.rows[0]);
 });
+
 
 // this endpoint should update an event by its id
 app.patch("/api/events/:id", async (req, res) => {
@@ -78,6 +82,13 @@ app.patch("/api/events/:id", async (req, res) => {
       [req.body.user_id, req.params.id],
     );
   }
+  if (req.body.application_user_id != null) {
+    response = await client.query(
+      "UPDATE events SET application_user_id = $1 WHERE id = $2 RETURNING *",
+      [req.body.application_user_id, req.params.id],
+    );
+  }
+
   res.send(response.rows);
 });
 

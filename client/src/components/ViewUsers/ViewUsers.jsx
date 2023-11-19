@@ -91,7 +91,7 @@ export const ViewUsers = () => {
             <tr key={i}>
                 <td>
                     {isMatch ? (
-                        <a href={`https://dashboard.lob.com/addresses/${data.address_id}`}>
+                        <a href={`https://dashboard.lob.com/addresses/${data.address_id}`} target="_blank">
                             {data.address_id}
                         </a>
                     ) : (

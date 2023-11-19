@@ -8,7 +8,7 @@ import CreateEvent from "./components/CreateEvent/CreateEvent";
 import ViewEvents from "./components/ViewEvents/ViewEvents";
 import Events from "./components/Events/Event";
 import Users from "./components/Users/Users";
-import Test from "./components/testcomponent";
+import Login from "./components/LoginComponent";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           <Route path="/getevents" element={<ViewEvents />} />
           <Route path="/events" element={<Events />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/test" element={<Test />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
       </div>
     </Router>
