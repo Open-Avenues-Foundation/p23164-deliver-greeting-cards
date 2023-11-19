@@ -3,29 +3,12 @@ import axios from "axios";
 import "./CreateUser.css";
 import { withAuth0 } from "@auth0/auth0-react";
 class CreateUser extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      address_id: "",
-      events: [],
-      application_user_id: "", // To be set from Auth0 user info
-    };
-  }
-
-  componentDidMount() {
-    const { auth0 } = this.props;
-    if (auth0 && auth0.isAuthenticated) {
-      this.setState({ application_user_id: auth0.user.sub });
-  }
-    axios
-      .get("https://deliver-greeting-cards.herokuapp.com/api/events")
-      .then((res) => {
-        const events = res.data;
-        this.setState({ events });
-      });
-  }
-
+  state = {
+    name: "",
+    address_id: "",
+    events: [],
+    application_user_id: "", // To be set from Auth0 user info
+  };
   handleNameChange = (event) => {
     this.setState({ name: event.target.value });
   };
@@ -33,7 +16,6 @@ class CreateUser extends React.Component {
   handleAddressChange = (event) => {
     this.setState({ address_id: event.target.value });
   };
-
   handleSubmit = (event) => {
     event.preventDefault();
     const data = {
@@ -50,11 +32,40 @@ class CreateUser extends React.Component {
         console.log(response.data);
         // Reloading the page
         window.location.reload();
+        this.setState(prevState => ({
+          events: [...prevState.events, response.data]
+        }));
       })
       .catch((error) => {
         console.error('Error adding event:', error);
       });
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      address_id: "",
+      events: [],
+      application_user_id: "", // To be set from Auth0 user info
+    };
+  }
+
+  componentDidMount() {
+    const { user, isAuthenticated } = this.props.auth0;
+    if (isAuthenticated && user) {
+      this.setState({ application_user_id: user.sub });
+  }
+    axios
+      .get("https://deliver-greeting-cards.herokuapp.com/api/events")
+      .then((res) => {
+        const events = res.data;
+        this.setState({ events });
+        this.setState({ events: res.data });
+      });
+  }
+
+
 
   render() {
     return (
