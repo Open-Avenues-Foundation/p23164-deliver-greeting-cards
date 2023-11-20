@@ -3,6 +3,7 @@ import axios from "axios";
 import LoginButton from './hooks/LoginButton'; 
 import Profile from './hooks/Profile';
 import './LoginComponent.css';
+import LogoutButton from './logout.jsx'
 export default class TestComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -34,7 +35,8 @@ export default class TestComponent extends React.Component {
                 </div>
                 
                 <div className="loginbutton"><LoginButton /> </div>
-                
+                <div className="loginbutton"><LogoutButton /> </div>
+
 
                 {this.state.users.map((user) => (
                     <div key={user.id}>

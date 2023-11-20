@@ -128,13 +128,13 @@ export class CreateEvent extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.events.map((event) => {
-                    return (
+            {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
                         <tr key={event.id}>
                             <td>{event.id}</td>
                         </tr>
-                    );
-                })}
+        ))
+    }
             </tbody>
         </table>
     </div>
@@ -146,14 +146,16 @@ export class CreateEvent extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.events.map((event) => {
-                    return (
-                        <tr key={event.id}>
-                            <td>{event.event_type}</td>
-                        </tr>
-                    );
-                })}
-            </tbody>
+    {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
+            <tr key={event.id}>
+                <td>{event.event_type}</td>
+                {/* Add more td tags if you want to display other properties of event */}
+            </tr>
+        ))
+    }
+</tbody>
+
         </table>
     </div>
     <div className="home">
@@ -164,13 +166,14 @@ export class CreateEvent extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.events.map((event) => {
-                    return (
+            {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
+                    
                         <tr key={event.id}>
                             <td>{event.date}</td>
-                        </tr>
-                    );
-                })}
+                            </tr>
+        ))
+    }
             </tbody>
         </table>
     </div>
@@ -183,14 +186,14 @@ export class CreateEvent extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.events.map((event) => {
-                    return (
+            {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
                         <tr key={event.id}>
                             <td>{event.user_id}</td>
 
                         </tr>
-                    );
-                })}
+            ))
+        }
             </tbody>
         </table>
     </div>
@@ -202,15 +205,15 @@ export class CreateEvent extends React.Component {
             </tr>
         </thead>
         <tbody>
-            {this.state.events.map((event) => {
-                return (
+        {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
                     <tr key={event.id}>
                         <td>
                             <button onClick={() => this.handleDeleteEvent(event.id)}>Delete entry</button>
                         </td>
                     </tr>
-                );
-            })}
+            ))
+        }
         </tbody>
 
 </div>

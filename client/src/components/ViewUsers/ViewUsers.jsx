@@ -1,11 +1,16 @@
 import "./ViewUsers.css";
 import React, { useState, useEffect } from "react";
-
+import { useAuth0 } from "@auth0/auth0-react";
 export const ViewUsers = () => {
   const [name, setName] = useState([]);
   const [addresses, setAddresses] = useState([]);
-
+  const [application_user_id, setApplication_user_id] = useState("");
+  const { user, isAuthenticated } = useAuth0();
+  
   useEffect(() => {
+    if (isAuthenticated && user) {
+      setApplication_user_id(user.sub);
+    }
     fetch('https://deliver-greeting-cards.herokuapp.com/api/addresses', {
       method: 'GET',
       headers: {
@@ -18,7 +23,8 @@ export const ViewUsers = () => {
       setAddresses(addressIds);
     })
     .catch(error => console.error('Error fetching data:', error));
-  }, []);
+
+  }, [user, isAuthenticated]);
   
   async function fetchText() {
     let response = await fetch(
@@ -65,16 +71,17 @@ export const ViewUsers = () => {
                     
                     <table>
                       <thead>
+                        
                           <tr>
                             <th className = "header-cell">Name</th></tr>
                           </thead>
-                            {name.map((data, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td>{data.name ? data.name : "Tameem"}</td>
-                                    </tr>
-                                )
-                            })}
+                          {name.filter(data => data.application_user_id === application_user_id)
+                          .map((data, i) => (
+                            <tr key={i}>
+                                <td>{data.name ? data.name : "Tameem"}</td>
+                            </tr>
+                        ))
+                    }
                     </table>
                 </div>
                 <div className="home addr">
@@ -85,7 +92,8 @@ export const ViewUsers = () => {
             </tr>
         </thead>
         <tbody>
-    {name.map((data, i) => {
+        {name.filter(data => data.application_user_id === application_user_id)
+                        .map((data, i) => {
         const isMatch = addresses.includes(data.address_id);
         return (
             <tr key={i}>
@@ -100,7 +108,9 @@ export const ViewUsers = () => {
                 </td>
             </tr>
         );
-    })}
+                    })
+                    }
+
 </tbody>
 
 
@@ -114,15 +124,15 @@ export const ViewUsers = () => {
                           <tr>
                             <th className = "header-cell">Delete</th></tr>
                           </thead>
-    {name.map((data, i) => {
-      return (
-        <tr key={i} className={i === name.length - 1 ? "last-row" : ""}>
-          <td>
-            <button onClick={() => handleDelete(data.id)}>Delete</button>
-          </td>
-        </tr>
-      )
-    })}
+      {name.filter(data => data.application_user_id === application_user_id)
+     .map((data, i, filteredArray) => (
+       <tr key={i} className={i === filteredArray.length - 1 ? "last-row" : ""}>
+         <td>
+           <button onClick={() => handleDelete(data.id)}>Delete</button>
+         </td>
+       </tr>
+     ))
+}
   </table>
 </div>
             </div>
