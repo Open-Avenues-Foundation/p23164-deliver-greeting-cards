@@ -1,14 +1,16 @@
 import React from "react";
 import axios from "axios";
 import "./Event.css";
-
-export default class CreateEvent extends React.Component {
+import { withAuth0 } from "@auth0/auth0-react";
+export class CreateEvent extends React.Component {
     state = {
+        events: [],
         eventType: "",
         date: "",
         userId: "",
+        application_user_id: "", // To be set from Auth0 user info
     };
-    
+
     handleEventName = (event) => {
         this.setState({ eventType: event.target.value });
         console.log(this.state);
@@ -21,7 +23,7 @@ export default class CreateEvent extends React.Component {
         this.setState({ userId: event.target.value });
         console.log(this.state);
     };
-    
+
     handleSubmit = (event) => {
         event.preventDefault();
     
@@ -29,8 +31,9 @@ export default class CreateEvent extends React.Component {
             event_type: this.state.eventType,
             date: this.state.date,
             user_id: this.state.userId,
+            application_user_id: this.state.application_user_id
         };
-    
+        console.log(data); // Just before axios.post to log the payload
         axios
         .post("https://deliver-greeting-cards.herokuapp.com/api/events", data)
         .then((response) => {
@@ -48,24 +51,36 @@ export default class CreateEvent extends React.Component {
         });
     };
 
+
     constructor(props) {
         super(props);
         this.state = {
-        events: [],
+            events: [],
+            eventType: "",
+            date: "",
+            userId: "",
+            application_user_id: "", // Will be set from Auth0 user info
         };
     }
+
+    
     
     componentDidMount() {
+        const { user, isAuthenticated } = this.props.auth0;
+        if (isAuthenticated && user) {
+            this.setState({ application_user_id: user.sub });
+        }
         axios
         .get("https://deliver-greeting-cards.herokuapp.com/api/events")
         .then((res) => {
             const events = res.data;
             console.log(events);
             this.setState({ events });
+            this.setState({ events: res.data });
         });
     }
     
-
+    
     
     handleDeleteEvent = id => {
         axios
@@ -91,6 +106,7 @@ export default class CreateEvent extends React.Component {
                 onChange={this.handleEventName}
                 />
             </label>
+            
             <label>
                 Date:
                 <input type="text" name="date" onChange={this.handleDateName} />
@@ -112,13 +128,13 @@ export default class CreateEvent extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.events.map((event) => {
-                    return (
+            {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
                         <tr key={event.id}>
                             <td>{event.id}</td>
                         </tr>
-                    );
-                })}
+        ))
+    }
             </tbody>
         </table>
     </div>
@@ -130,14 +146,16 @@ export default class CreateEvent extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.events.map((event) => {
-                    return (
-                        <tr key={event.id}>
-                            <td>{event.event_type}</td>
-                        </tr>
-                    );
-                })}
-            </tbody>
+    {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
+            <tr key={event.id}>
+                <td>{event.event_type}</td>
+                {/* Add more td tags if you want to display other properties of event */}
+            </tr>
+        ))
+    }
+</tbody>
+
         </table>
     </div>
     <div className="home">
@@ -148,13 +166,14 @@ export default class CreateEvent extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.events.map((event) => {
-                    return (
+            {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
+                    
                         <tr key={event.id}>
                             <td>{event.date}</td>
-                        </tr>
-                    );
-                })}
+                            </tr>
+        ))
+    }
             </tbody>
         </table>
     </div>
@@ -167,14 +186,14 @@ export default class CreateEvent extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.state.events.map((event) => {
-                    return (
+            {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
                         <tr key={event.id}>
                             <td>{event.user_id}</td>
 
                         </tr>
-                    );
-                })}
+            ))
+        }
             </tbody>
         </table>
     </div>
@@ -186,15 +205,15 @@ export default class CreateEvent extends React.Component {
             </tr>
         </thead>
         <tbody>
-            {this.state.events.map((event) => {
-                return (
+        {this.state.events.filter(event => event.application_user_id === this.state.application_user_id)
+        .map((event, i) => (
                     <tr key={event.id}>
                         <td>
                             <button onClick={() => this.handleDeleteEvent(event.id)}>Delete entry</button>
                         </td>
                     </tr>
-                );
-            })}
+            ))
+        }
         </tbody>
 
 </div>
@@ -204,5 +223,8 @@ export default class CreateEvent extends React.Component {
 
     </div>
         );
+        
     }
+    
     }
+    export default withAuth0(CreateEvent);
